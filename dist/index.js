@@ -76,7 +76,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         if (error instanceof datadog_ci_1.synthetics.CiError) {
             (0, report_ci_error_1.reportCiError)(error, reporter);
         }
-        core.setFailed(`Errors: ${{ error }}`);
+        core.setFailed(`Errors: ${error.message}`);
         core.setFailed('Running Datadog Synthetics tests failed.');
     }
 });
