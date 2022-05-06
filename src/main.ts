@@ -34,7 +34,7 @@ const run = async (): Promise<void> => {
     if (error instanceof synthetics.CiError) {
       reportCiError(error, reporter)
     }
-    core.setFailed(`Errors: ${(error as Error).message}`)
+    core.setFailed((error as Error).message)
     core.setFailed('Running Datadog Synthetics tests failed.')
   }
 }
