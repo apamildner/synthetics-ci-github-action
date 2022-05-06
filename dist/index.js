@@ -76,6 +76,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         if (error instanceof datadog_ci_1.synthetics.CiError) {
             (0, report_ci_error_1.reportCiError)(error, reporter);
         }
+        core.setFailed(`Errors: ${error}`);
         core.setFailed('Running Datadog Synthetics tests failed.');
     }
 });
@@ -18389,16 +18390,6 @@ exports.isBuffer = __nccwpck_require__(4293).Buffer.isBuffer;
 function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
-
-
-/***/ }),
-
-/***/ 4137:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const binding = __nccwpck_require__(4240);
-
-module.exports = binding.getCPUInfo;
 
 
 /***/ }),
@@ -70476,7 +70467,7 @@ const crypto = __nccwpck_require__(6417);
 
 let cpuInfo;
 try {
-  cpuInfo = __nccwpck_require__(4137)();
+  cpuInfo = __nccwpck_require__(7295)();
 } catch {}
 
 const { bindingAvailable } = __nccwpck_require__(5708);
@@ -70851,7 +70842,7 @@ let AESGCMDecipher;
 let ChaChaPolyDecipher;
 let GenericDecipher;
 try {
-  binding = __nccwpck_require__(9041);
+  binding = __nccwpck_require__(9623);
   ({ AESGCMCipher, ChaChaPolyCipher, GenericCipher,
      AESGCMDecipher, ChaChaPolyDecipher, GenericDecipher } = binding);
 } catch {}
@@ -106696,17 +106687,11 @@ exports.Stream = Stream;
 
 /***/ }),
 
-/***/ 4240:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ 9623:
+/***/ ((module) => {
 
-module.exports = require(__nccwpck_require__.ab + "build/Release/cpufeatures.node")
+module.exports = eval("require")("./crypto/build/Release/sshcrypto.node");
 
-/***/ }),
-
-/***/ 9041:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-module.exports = require(__nccwpck_require__.ab + "lib/protocol/crypto/build/Release/sshcrypto.node")
 
 /***/ }),
 
@@ -106722,6 +106707,14 @@ module.exports = eval("require")("bufferutil");
 /***/ ((module) => {
 
 module.exports = eval("require")("coffee-script");
+
+
+/***/ }),
+
+/***/ 7295:
+/***/ ((module) => {
+
+module.exports = eval("require")("cpu-features");
 
 
 /***/ }),
