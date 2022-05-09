@@ -49,6 +49,7 @@ const process_results_1 = __nccwpck_require__(8134);
 const report_ci_error_1 = __nccwpck_require__(3567);
 const resolve_config_1 = __nccwpck_require__(3303);
 const datadog_ci_1 = __nccwpck_require__(3087);
+const util_1 = __nccwpck_require__(1669);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
     const context = {
         stdin: process.stdin,
@@ -76,7 +77,10 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         if (error instanceof datadog_ci_1.synthetics.CiError) {
             (0, report_ci_error_1.reportCiError)(error, reporter);
         }
-        core.setFailed(error.message);
+        core.error(String(error));
+        core.error(Object.entries(error).toString());
+        core.error(error);
+        core.error((0, util_1.inspect)(error, { depth: -1 }));
         core.setFailed('Running Datadog Synthetics tests failed.');
     }
 });

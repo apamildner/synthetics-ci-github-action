@@ -4,6 +4,7 @@ import {renderResults} from './process-results'
 import {reportCiError} from './report-ci-error'
 import {resolveConfig} from './resolve-config'
 import {synthetics} from '@datadog/datadog-ci'
+import { inspect } from 'util'
 
 const run = async (): Promise<void> => {
   const context: BaseContext = {
@@ -34,7 +35,10 @@ const run = async (): Promise<void> => {
     if (error instanceof synthetics.CiError) {
       reportCiError(error, reporter)
     }
-    core.setFailed((error as Error).message)
+    core.error(String(error))
+    core.error(Object.entries(error as Object).toString())
+    core.error(error as Error)
+    core.error(inspect(error, {depth: -1}))
     core.setFailed('Running Datadog Synthetics tests failed.')
   }
 }
